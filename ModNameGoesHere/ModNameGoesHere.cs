@@ -1,26 +1,47 @@
 ﻿using HarmonyLib;
 using NeosModLoader;
+using UnityNeos;
 
-namespace ModNameGoesHere
+namespace FuckMirrors
 {
-    public class ModNameGoesHere : NeosMod
+    public class FuckMirrors : NeosMod
     {
-        public override string Name => "ModNameGoesHere";
-        public override string Author => "username";
+        public override string Name => "FuckMirrors";
+        public override string Author => "dfgHiatus";
         public override string Version => "1.0.0";
-        public override string Link => "https://github.com/GithubUsername/RepoName/";
+        public override string Link => "https://github.com/dfgHiatus/RepoName/";
+        private static ModConfiguration config;
+
+        [AutoRegisterConfigKey]
+        public static ModConfigurationKey<bool> enabled = new ModConfigurationKey<bool>("enabled", "Enabled", () => true);
+
         public override void OnEngineInit()
         {
-            Harmony harmony = new Harmony("net.username.Template");
-            harmony.PatchAll();
+            config = GetConfiguration();
+            new Harmony("net.dfgHiatus.FuckMirrors").PatchAll();
         }
-		
-        [HarmonyPatch(typeof(class you want to patch), "name of method you want to patch")]
-        class ModNameGoesHerePatch
+
+        [HarmonyPatch(typeof(CameraConnector), "ApplyChanges")]
+        public class CameraConnectorPatch
         {
-            public static bool Prefix()
+            public static bool Prefix(CameraConnector __instance)
             {
-                return false;//dont run rest of method
+                if (!config.GetValue(enabled))
+                    return true;
+                else
+                    return __instance.Owner.World.Focus == FrooxEngine.World.WorldFocus.PrivateOverlay;
+            }
+        }
+
+        [HarmonyPatch(typeof(CameraPortalConnector), "ApplyChanges")]
+        public class CameraPortalPatch
+        {
+            public static bool Prefix(CameraPortalConnector __instance)
+            {
+                if (!config.GetValue(enabled))
+                    return true;
+                else
+                    return __instance.Owner.World.Focus == FrooxEngine.World.WorldFocus.PrivateOverlay;
             }
         }
     }
