@@ -9,7 +9,7 @@ namespace FuckMirrors
         public override string Name => "FuckMirrors";
         public override string Author => "dfgHiatus";
         public override string Version => "1.0.0";
-        public override string Link => "https://github.com/dfgHiatus/RepoName/";
+        public override string Link => "https://github.com/dfgHiatus/FuckMirrors/";
         private static ModConfiguration config;
 
         [AutoRegisterConfigKey]
