@@ -1,6 +1,8 @@
 # FuckMirrors
 
-A [NeosModLoader](https://github.com/zkxs/NeosModLoader) mod for [Neos VR](https://neos.com/) that... removes mirrors.
+A [NeosModLoader](https://github.com/zkxs/NeosModLoader) mod for [Neos VR](https://neos.com/) that... removes mirrors*
+
+*<i>OK, this isn't a mod that removes mirrors outright but one that locally disables world space cameras. UI elements, etc. that rely on cameras to render things such a texture onto a 3D surface will break, you have been warned </i>
 
 ## Installation
 1. Install [NeosModLoader](https://github.com/zkxs/NeosModLoader).
